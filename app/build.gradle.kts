@@ -51,6 +51,7 @@ android {
 
 dependencies {
 
+    //MAIN
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.2")
@@ -66,4 +67,32 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // DI
+    implementation("io.insert-koin:koin-core:3.4.3")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.6")
+    implementation("io.insert-koin:koin-android:3.4.3")
+
+    //Room
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    //OrbitMVI
+    val orbitVersion = "4.5.0"
+    implementation("org.orbit-mvi:orbit-core:$orbitVersion")
+    implementation("org.orbit-mvi:orbit-viewmodel:$orbitVersion")
+    implementation("org.orbit-mvi:orbit-compose:$orbitVersion")
+
+    //Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
+    //Yandex
+    implementation("com.yandex.android:mobileads:6.3.0")
+
+    //In app update
+    val inAppUpdateVersion = "2.1.0"
+    implementation("com.google.android.play:app-update:$inAppUpdateVersion")
+    implementation("com.google.android.play:app-update-ktx:$inAppUpdateVersion")
 }
