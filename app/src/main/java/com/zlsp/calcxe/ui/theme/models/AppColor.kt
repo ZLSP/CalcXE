@@ -6,12 +6,18 @@ object AppColor {
     val greenLightPrimary = Color(0xFF186C32)
     val greenLightOnPrimary = Color(0xFFFFFFFF)
     val greenLightBackground = Color(0xFFFCFDF7)
+    val greenLightOnBackground = Color(0xFF1a1c19)
     val greenLightPlaceholder = Color(0xA6186C32)
+    val greenLightContainer = Color(0xFFA2F6AC)
+    val greenLightOnContainer = Color(0xFF002109)
 
     val greenDarkPrimary = Color(0xFF87D991)
     val greenDarkOnPrimary = Color(0xFF003914)
     val greenDarkBackground = Color(0xFF1A1C19)
+    val greenDarkOnBackground = Color(0xFFe2e3dd)
     val greenDarkPlaceholder = Color(0xA587D991)
+    val greenDarkContainer = Color(0xFF005321)
+    val greenDarkOnContainer = Color(0xFFa2f6ac)
 
     val pinkLightPrimary = Color(0xFFb80f55)
     val pinkLightOnPrimary = Color(0xFFFFFFFF)

@@ -9,18 +9,22 @@ object AppPallet {
     private val greenLightColorPalette = lightColorScheme(
         primary = AppColor.greenLightPrimary,
         onPrimary = AppColor.greenLightOnPrimary,
+        primaryContainer = AppColor.greenLightContainer,
+        onPrimaryContainer = AppColor.greenLightOnContainer,
         surface = AppColor.greenLightPlaceholder,
         background = AppColor.greenLightBackground,
-        onBackground = AppColor.greenLightPrimary
+        onBackground = AppColor.greenLightOnBackground
 
     )
 
     private val greenDarkColorPalette = darkColorScheme(
         primary = AppColor.greenDarkPrimary,
         onPrimary = AppColor.greenDarkOnPrimary,
+        primaryContainer = AppColor.greenDarkContainer,
+        onPrimaryContainer = AppColor.greenDarkOnContainer,
         surface = AppColor.greenDarkPlaceholder,
         background = AppColor.greenDarkBackground,
-        onBackground = AppColor.greenDarkPrimary
+        onBackground = AppColor.greenDarkOnBackground
     )
     
     private val greenAmoledColorPalette = greenDarkColorPalette.copy(background = Color.Black)
@@ -36,7 +40,7 @@ object AppPallet {
         onPrimary = AppColor.pinkLightOnPrimary,
         surface = AppColor.pinkLightPlaceholder,
         background = AppColor.pinkLightBackground,
-        onBackground = AppColor.pinkLightPrimary
+        onBackground = AppColor.pinkLightPrimary,
     )
 
     private val pinkDarkColorPalette = darkColorScheme(

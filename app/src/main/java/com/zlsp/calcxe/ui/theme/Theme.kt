@@ -41,8 +41,9 @@ fun AppTheme(
     val systemBarsColor = colors.switch().background
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = systemBarsColor,
-            darkIcons = isDarkIcons
+            color = Color.Transparent,
+            darkIcons = isDarkIcons,
+            isNavigationBarContrastEnforced = false
         )
     }
 
