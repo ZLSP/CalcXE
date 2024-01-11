@@ -3,23 +3,32 @@ package com.zlsp.calcxe
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -44,6 +53,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
@@ -102,7 +112,7 @@ class MainActivity : ComponentActivity() {
                                 Screen.LIST -> searchListValue.value
                             },
                             onValueChange = {
-                                when(activeScreen) {
+                                when (activeScreen) {
                                     Screen.SETTINGS -> Unit
                                     Screen.HOME -> searchHomeValue.value = it
                                     Screen.LIST -> searchListValue.value = it
@@ -110,13 +120,12 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                         NavHost(
-                            modifier = Modifier.padding(bottom = it.calculateBottomPadding()),
                             navController = navController,
                             startDestination = Screen.HOME.route,
-                            enterTransition = { fadeIn() },
-                            popEnterTransition = { fadeIn() },
-                            exitTransition = { fadeOut() },
-                            popExitTransition = { fadeOut() }
+                            enterTransition = { EnterTransition.None },
+                            popEnterTransition = { EnterTransition.None },
+                            exitTransition = { ExitTransition.None },
+                            popExitTransition = { ExitTransition.None }
                         ) {
                             composable(Screen.HOME.route) {
                                 HomeScreen()
@@ -124,7 +133,13 @@ class MainActivity : ComponentActivity() {
                             composable(Screen.SETTINGS.route) {
                                 SettingsScreen()
                             }
-                            composable(Screen.LIST.route) {
+                            composable(
+                                route = Screen.LIST.route,
+                                enterTransition = { EnterTransition.None },
+                                popEnterTransition = { EnterTransition.None },
+                                exitTransition = { ExitTransition.None },
+                                popExitTransition = { ExitTransition.None }
+                            ) {
                                 ListScreen()
                             }
                         }
@@ -147,12 +162,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainWrapper(
     bottomBarContent: @Composable () -> Unit,
-    screenContent: @Composable (PaddingValues) -> Unit
+    screenContent: @Composable () -> Unit
 ) {
     Scaffold(
         contentColor = MaterialTheme.colorScheme.primary,
         bottomBar = bottomBarContent,
-        content = screenContent,
+        content = {
+            Column(Modifier.padding(bottom = it.calculateBottomPadding())) {
+                screenContent()
+            }
+        },
     )
 }
 
@@ -185,28 +204,45 @@ fun AppTopBar(
                     value = searchValue,
                     onValueChange = onValueChange
                 )
-                AnimatedVisibility(screen == Screen.LIST) {
+                AnimatedVisibility(
+                    visible = screen == Screen.LIST,
+                    enter = expandHorizontally(expandFrom = Alignment.Start),
+                    exit = shrinkHorizontally(shrinkTowards = Alignment.Start)
+                ) {
                     Row {
-                        Icon(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                                .size(22.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.ic_add),
-                            contentDescription = null
+                        IconTopBar(
+                            iconRes = R.drawable.ic_add,
+                            paddingHorizontal = 10
                         )
-                        Icon(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                                .size(22.dp),
-                            imageVector = ImageVector.vectorResource(R.drawable.ic_arrow),
-                            contentDescription = null
+                        IconTopBar(
+                            iconRes = R.drawable.ic_arrow,
+                            paddingHorizontal = 0
                         )
                     }
                 }
             }
         }
     }
+}
 
+@Composable
+private fun IconTopBar(
+    @DrawableRes iconRes: Int,
+    paddingHorizontal: Int,
+) {
+    Icon(
+        modifier = Modifier
+            .padding(horizontal = paddingHorizontal.dp)
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.primary,
+                RoundedCornerShape(18.dp)
+            )
+            .padding(10.dp)
+            .size(28.dp, 21.dp),
+        imageVector = ImageVector.vectorResource(iconRes),
+        contentDescription = null
+    )
 }
 
 @Composable
@@ -271,7 +307,9 @@ fun RowScope.TextFieldSearch(
                     if (value.isBlank()) {
                         Text(
                             text = "Введите название продукта",
-                            color = MaterialTheme.colorScheme.primary.copy(0.6f)
+                            color = MaterialTheme.colorScheme.primary.copy(0.6f),
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1
                         )
                     } else {
                         innerTextField.invoke()
@@ -313,12 +351,7 @@ fun AppBottomBar(
             .padding(10.dp),
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = MaterialTheme.colorScheme.background,
-                    shape = RoundedCornerShape(24.dp)
-                ),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Screen.entries.toTypedArray().forEach { screen ->

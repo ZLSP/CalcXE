@@ -8,8 +8,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeScreen() {
-    Column {
-        Column(Modifier.padding(10.dp)) {
-        }
+    Column(Modifier.padding(10.dp)) {
+
     }
 }
