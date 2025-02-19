@@ -16,6 +16,9 @@
     <string name="columnCarbohydratesMin">У</string>
     <string name="columnFavorite">Избранное</string>
     <string name="columnFavoriteMin">И</string>
+    <string name="filterCategories">Категории</string>
+    <string name="filterUser">добавленные</string>
+    <string name="filterFavorite">Избранное</string>
     <string name="categoryFavorite">Избранное</string>
     <string name="categoryUser">Добавленные</string>
     <string name="categoryAll">Все категории</string>
@@ -26,8 +29,8 @@
     <string name="categoryGroats">Крупы и злаки</string>
     <string name="categoryMeat">Мясо, птица и субродукты</string>
     <string name="categoryFish">Рыба и морепродукты</string>
-    <string name="categoryCheese">Сыр, масла и жиры</string>
-    <string name="categoryDairy">Молочные продукты</string>
+    <string name="categoryCheese">Масла и жиры</string>
+    <string name="categoryDairy">Молочные и кисломолочные продукты</string>
     <string name="categoryNuts">Орехи, семена и бобовые</string>
     <string name="categorySpices">Специи</string>
     <string name="categoryAlcohol">Алкоголь</string>

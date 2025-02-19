@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -97,4 +99,12 @@ dependencies {
     val inAppUpdateVersion = "2.1.0"
     implementation("com.google.android.play:app-update:$inAppUpdateVersion")
     implementation("com.google.android.play:app-update-ktx:$inAppUpdateVersion")
+
+    //Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+
+    //coil3
+    val coilVersion = "3.0.4"
+    implementation("io.coil-kt.coil3:coil:$coilVersion")
+    implementation("io.coil-kt.coil3:coil-compose:$coilVersion")
 }

@@ -6,8 +6,6 @@ import com.zlsp.calcxe.R
 
 enum class TypeCategory(@StringRes val nameId: Int, @DrawableRes val imageId: Int) {
     USER(nameId = R.string.categoryUser, imageId = R.drawable.ic_add),
-    FAVORITE(nameId = R.string.categoryFavorite, imageId = R.drawable.ic_favorite),
-    ALL(nameId = R.string.categoryAll, imageId = R.drawable.ic_all),
     GREEN(nameId = R.string.categoryGreen, imageId = R.drawable.ic_green),
     FRUIT(nameId = R.string.categoryFruit, imageId = R.drawable.ic_fruit),
     SWEET(nameId = R.string.categorySweet, imageId = R.drawable.ic_sweet),
