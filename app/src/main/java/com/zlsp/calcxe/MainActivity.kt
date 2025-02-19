@@ -64,6 +64,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.zlsp.calcxe.base.ext.borderGradient
 import com.zlsp.calcxe.base.ext.clickableNoRipple
 import com.zlsp.calcxe.base.ext.shadow
@@ -86,7 +87,7 @@ class MainActivity : ComponentActivity() {
             val searchHomeValue = remember { mutableStateOf("") }
             val searchListValue = remember { mutableStateOf("") }
             AppTheme(
-                themeMode = ThemeMode.AMOLED,
+                themeMode = ThemeMode.DARK,
             ) {
                 MainWrapper(
                     bottomBarContent = {
@@ -133,13 +134,7 @@ class MainActivity : ComponentActivity() {
                             composable(Screen.SETTINGS.route) {
                                 SettingsScreen()
                             }
-                            composable(
-                                route = Screen.LIST.route,
-                                enterTransition = { EnterTransition.None },
-                                popEnterTransition = { EnterTransition.None },
-                                exitTransition = { ExitTransition.None },
-                                popExitTransition = { ExitTransition.None }
-                            ) {
+                            composable(Screen.LIST.route) {
                                 ListScreen()
                             }
                         }
